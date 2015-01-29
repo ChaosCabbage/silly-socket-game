@@ -34,7 +34,7 @@ function(DependencyLoader,
 
 			var player = new SimpleAvatar({
 					$canvas: $('#layer2')[0],
-					imageUrl: "images/you.jpg"
+					imageUrl: "images/ice.png"
 				}),
 				// Joystix accepts the following options:
 				//   $window		required	jQuery object representing the window
@@ -51,16 +51,16 @@ function(DependencyLoader,
 				// keyboard always sends 5 - you can change this with the 'keyboardSpeed' option passed to Joystix
 				if(movement.x1){
 					if(movement.x1>0){
-						player.moveRight();
+						player.moveRight(movement.x1);
 					}else if(movement.x1<0){
-						player.moveLeft();
+						player.moveLeft(-movement.x1);
 					}
 				}
 				if(movement.y1){
 					if(movement.y1>0){
-						player.moveDown();
+						player.moveDown(movement.y1);
 					}else if(movement.y1<0){
-						player.moveUp();
+						player.moveUp(-movement.y1);
 					}
 				}
 			});
@@ -70,7 +70,7 @@ function(DependencyLoader,
 			var otherGuysPositions = {};
 			
 			var otherGuyImage = new Image();
-			otherGuyImage.src = "images/other.png";
+			otherGuyImage.src = "images/jake.png";
 			var ctx = $('#layer2')[0].getContext("2d");
 			
 			function drawGuy(pos) {

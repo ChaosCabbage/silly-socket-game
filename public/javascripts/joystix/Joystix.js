@@ -1,4 +1,5 @@
-define(['lib/Modernizr.2.6.2-touch',
+define('modernizr', [], Modernizr);
+define(['modernizr',
 		'joystix/gamepadSupport',
 		'joystix/MultiTouchJoystick',
 		'joystix/KeyboardController',
@@ -96,7 +97,7 @@ function(Modernizr,
 			}else if(Modernizr && Modernizr.touch){
 				self.moveCb(self.getMovementForMultiTouch(MultiTouchJoystick.getMovementIntent()));
 				self.buttonCb(self.getButtonPressForMultiTouch(MultiTouchJoystick.getButtonPress()));
-			}else{
+			} else{
 				self.moveCb(self.getMovementForKeyboard(KeyboardController.getMovement()));
 				self.buttonCb(self.getButtonsForKeyboard(KeyboardController.getButtonPress()));
 			}

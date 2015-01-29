@@ -2,7 +2,7 @@ define(function(){
 	
 	function SimpleAvatar(opts){
 	
-		this.speed =5;
+		this.speed = 1;
 		this.top = 100;
 		this.left = 200;
 	
@@ -26,26 +26,26 @@ define(function(){
 		
 		this.draw = draw;
 	}
-	SimpleAvatar.prototype.moveUp = function(){
-		this.top -= this.speed;
-		if (this.top < -60) {
+	SimpleAvatar.prototype.moveUp = function(y){
+		this.top -= y*this.speed;
+		if (this.top < -350) {
 			this.top = this.canvasH;
 		}
 	};
-	SimpleAvatar.prototype.moveDown = function(){
-		this.top += this.speed;
+	SimpleAvatar.prototype.moveDown = function(y){
+		this.top += y*this.speed;
 		if (this.top > this.canvasH) {
-			this.top = -60;
+			this.top = -350;
 		}
 	};
-	SimpleAvatar.prototype.moveLeft = function(){
-		this.left -= this.speed;
+	SimpleAvatar.prototype.moveLeft = function(x){
+		this.left -= x*this.speed;
 		if (this.left < -180) {
 			this.left = this.canvasW;
 		}
 	};
-	SimpleAvatar.prototype.moveRight = function(){
-		this.left += this.speed;
+	SimpleAvatar.prototype.moveRight = function(x){
+		this.left += x*this.speed;
 		if (this.left > this.canvasW) {
 			this.left = -180;
 		}
