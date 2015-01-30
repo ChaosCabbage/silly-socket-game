@@ -1,0 +1,29 @@
+
+ Receive:    
+
+   "joined lobby" : 
+
+	   { 
+			classes: [      ...      ], 
+			players: [
+						{ class: "Ice",  pos: {x1, y1} },
+						{ class: "Fire", pos: {x2, y2} },
+							  		    ...
+					 ]
+		}
+
+
+		->    Show canvas, start drawing people
+		      Show list of remaining classes
+		      On clicking a class :
+		      		Receive:
+		      			"failed to join" -> do nothing
+		      			"joined game" -> hide class list
+
+	"position update" 
+		-> Update list of people
+
+
+Send:
+
+	Movement controller -> "try move"

@@ -1,0 +1,9 @@
+Hi there.
+This is going to be an amazing game one day, maybe.
+It's all javascript, because that's the fashion these days.
+
+To run the server, install node.js, and run
+
+  node bin/www
+  
+The server uses express.js and socket.io
