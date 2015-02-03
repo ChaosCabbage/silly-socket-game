@@ -10,8 +10,6 @@ function vector_add(a, b) {
 // system going on, but this'll do for now.
 function corrected_move(old_pos, move) {
     var new_pos = vector_add(old_pos, move);
-
-    console.log("Trying to move to (" + new_pos.x + "," + new_pos.y + ")");
 	
 	var mapheight = 675;
 	var mapwidth = 1125;
@@ -50,7 +48,6 @@ function Player(socket, job) {
 	    var dy = parseInt(move.y);
 
         if (!isNaN(dx) && !isNaN(dy)) {
-	        console.log("Moving by (" + dx + "," + dy + ")");
 	        my_pos = corrected_move(my_pos, { x: dx, y: dy } );
 	    } else {
 	        console.log("Your numbers were shit");

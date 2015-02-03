@@ -5,7 +5,10 @@ var GameRoomIO = function(io, room_name, room_logic) {
     var playerTriesToJoinGame = function (socket, join_request) {
         console.log(socket.id + " trying to join with " + JSON.stringify(join_request));
         if (room_logic.isAllowedToJoin(join_request)) {
-			room_logic.addPlayerToGame(new Player(socket, join_request.job));
+            room_logic.addPlayerToGame(new Player(socket, join_request.job));
+            socket.on("disconnect", function () {
+                room_logic.removePlayerById(socket.id);
+            });
 		} else {
 			socket.emit("failed to join", {reason: "Class taken"});
 		}

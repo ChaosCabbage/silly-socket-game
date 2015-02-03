@@ -35,6 +35,15 @@ var GameRoomLogic = function() {
 		players.push(player);
 	};
 
+	var removePlayerById = function(id) {
+	    for (var i = 0; i < players.length; ++i) {
+	        if (players[i].id == id) {
+	            players.splice(i, 1);
+	            return;
+	        }
+	    }
+	};
+
 	return { 
 		  players : players
 		, allClasses: allClasses
@@ -43,6 +52,7 @@ var GameRoomLogic = function() {
 		, currentFullState: currentFullState
 		, isAllowedToJoin: isAllowedToJoin
 		, addPlayerToGame: addPlayerToGame
+        , removePlayerById: removePlayerById
 	};
 };
 

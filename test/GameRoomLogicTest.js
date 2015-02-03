@@ -73,4 +73,16 @@ describe('GameRoomLogic', function () {
 		});
 	});
 
+	describe('removePlayerById', function () {
+	    it('should remove the player with this id', function () {
+	        logic.players.push({ id: 5 });
+	        logic.players.push({ id: 7 });
+
+	        logic.removePlayerById(5);
+
+
+	        logic.players.should.eql([{ id: 7 }],"Wrong players removed");
+	    });
+	});
+
 });
