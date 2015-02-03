@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+
+<head><title>A silly game</title>
+
+<script src="javascripts/lib/Modernizr.2.6.2-touch.js"></script>
+</head>
+
+<body>
+
+<script data-main="javascripts/debugscreenmain" src="javascripts/lib/require.js"></script>
+
+<div style="position: relative;">
+    <div id="gamestate"> </div>
+    <div id="startbutton">
+        <button id="connect">Connect</button><br/>
+    </div>
+    <div id="jobs" style="display: none;">
+        <button id="ice">Be the Ice Wizard</button><br />
+        <button id="fire">Be the Fire Wizard</button><br />
+        <button id="earth">Be the Earth Wizard</button><br />
+        <button id="gimp">Be the Gimp</button><br />
+    </div>
+    <div id="movement" style="display: none;">
+        <input id="x" placeholder="x" />
+        <input id="y" placeholder="y" />
+        <button id="move">Move</button>
+    </div>
+
+</div>
+    
+
+
+</body>
+
+</html>

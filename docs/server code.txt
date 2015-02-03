@@ -7,7 +7,7 @@ public:
 	//
 	// Listens to 
 	//
-	//    "join game" : Send { class: "Ice" } to join as the Ice wizard.
+	//    "join game" : Send { job: "Ice" } to join as the Ice wizard.
 	//                  Accepts one player each of "Ice", "Fire", "Earth"
 	//                  Accepts any number of "Gimp"
 	//                   
@@ -19,22 +19,22 @@ public:
 	//										  	  [1,0,0,0,0,0,1],
 	//										       	    ...      ], 
 	//									classes: [      ...      ], 
-	//									players: [{ class: "Ice",  pos: {x1, y1} },
-	//											  { class: "Fire", pos: {x2, y2} },
+	//									players: [{ job: "Ice",  pos: {x1, y1} },
+	//											  { job: "Fire", pos: {x2, y2} },
 	//													      ...
 	//											 ]
 	//								}
 	//
 	//
 	//    "joined game" : Sends with no data.
-	//    "failed to join" : Sends { reason: "Class taken" } Tells this socket that your chosen class was already taken.
+	//    "failed to join" : Sends { reason: "job taken" } Tells this socket that your chosen job was already taken.
 
 private:
 
 	void broadcastPlayerPositions() const;
 	// Broadcasts
 	// 
-	//   "position update" : Sends { players: [ { class: "Ice", pos: {x, y} } ] }
+	//   "position update" : Sends [ { job: "Ice", pos: {x, y} }, ...] 
 	//   to everyone in the room.
 };
 

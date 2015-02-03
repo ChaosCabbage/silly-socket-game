@@ -8,6 +8,8 @@ var bodyParser = require('body-parser');
 var routes = require('../routes/index');
 var users = require('../routes/users');
 
+var debug = require('debug')('sillygame');
+
 var app = express();
 
 // view engine setup
@@ -57,5 +59,12 @@ app.use(function(err, req, res, next) {
     });
 });
 
+// Go!
+app.set('port', process.env.PORT || 3000);
 
-module.exports = app;
+var server = app.listen(app.get('port'), function() {
+  debug('Express server listening on port ' + server.address().port);
+});
+
+
+module.exports = server;

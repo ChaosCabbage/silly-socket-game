@@ -1,6 +1,6 @@
-/*
-	main.js file
-*/
+//
+//	main.js file
+//
 
 require.config({
   // The shim config allows us to configure dependencies for
@@ -26,68 +26,97 @@ function(DependencyLoader,
 	'use strict';
 
 	new DependencyLoader({
-		onLoaded: function(){
+	    onLoaded: function () {
 
-			// example Joystix code
-			
-			// SimpleAvatar is just a div on the screen that moves around when you tell it to
+	        var game_assets = {
+	            gameboard: $("#gameboard")[0],
+	            canvases: [$("#layer1")[0], $("#layer2")[0]],
+	            choosebuttons: {
+	                all :  $("#choosejob")[0],
+	                ice:   $("#chooseice")[0],
+	                fire:  $("#choosefire")[0],
+	                earth: $("#chooseearth")[0],
+                    gimp:  $("#choosegimp")[0]
+	            },
+	            images: {
+	                Ice:   $("#iceimage")[0],
+	                Fire:  $("#fireimage")[0],
+	                Earth: $("#earthimage")[0],
+	                Gimp:  $("#gimpimage")[0]
+	            }
+	        };
 
-			var player = new SimpleAvatar({
-					$canvas: $('#layer2')[0],
-					imageUrl: "images/ice.png"
-				}),
-				// Joystix accepts the following options:
-				//   $window		required	jQuery object representing the window
-				//   keyboardSpeed 	optional	the speed a keyboard press should send. Defaults to 5.
-				controller = new Joystix({
-					$window: $(window)
-				});
-			
+	        var current_players = [];
 
-			controller.onMove(function(movement){
-				// x1,y1,x2 and y2 here refer to the four axes
-				// only x1 and y1 will be present for MultiTouch and keyboard
-				// and yes they are analogue, normalised on a scale of 0 to 10
-				// keyboard always sends 5 - you can change this with the 'keyboardSpeed' option passed to Joystix
-				if(movement.x1){
-					if(movement.x1>0){
-						player.moveRight(movement.x1);
-					}else if(movement.x1<0){
-						player.moveLeft(-movement.x1);
-					}
-				}
-				if(movement.y1){
-					if(movement.y1>0){
-						player.moveDown(movement.y1);
-					}else if(movement.y1<0){
-						player.moveUp(-movement.y1);
-					}
-				}
-			});
+	        var socket = io();
+
+	        var setup_buttons = function () {
+	            function join_game(job) {
+	                socket.emit("join game", { job: job });
+	                game_assets.choosebuttons.all.style.display = "none";
+	            };
+
+	            $(game_assets.choosebuttons.ice).click(function () { join_game("Ice"); });
+	            $(game_assets.choosebuttons.fire).click(function () { join_game("Fire"); });
+	            $(game_assets.choosebuttons.earth).click(function () { join_game("Earth"); });
+	            $(game_assets.choosebuttons.gimp).click(function () { join_game("Gimp"); });
+	        };
+
+	        var setup_controls = function () {
+	            // Joystix accepts the following options:
+	            //   $window		required	jQuery object representing the window
+	            //   keyboardSpeed 	optional	the speed a keyboard press should send. Defaults to 5.
+	            var controller = new Joystix({
+	                $window: $(window)
+	            });
+
+	            var x_move = 0;
+	            var y_move = 0;
+	            controller.onMove(function (movement) {
+	                x_move += movement.x1;
+	                y_move += movement.y1;
+	            });
+
+	            var emit_move = function () {
+	                socket.emit("try move", { x: x_move, y: y_move });
+	                x_move = 0;
+	                y_move = 0;
+	            };
+
+	            setInterval(emit_move, 50);
+	        };
+
+	        socket.on("joined lobby", function (data) {
+	            setup_buttons();
+	            setup_controls();
+	            game_assets.gameboard.style.display = "inline";
+	            current_players = data.players;
+	        });
+
+	        socket.on("failed to join", function () {
+	            game_assets.choosebuttons.all.style.display = "inline";
+	        });
+
+	        socket.on("position update", function (data) {
+	            current_players = data;
+	        });
+
 			
-			var socket = io();
-			
-			var otherGuysPositions = {};
-			
-			var otherGuyImage = new Image();
-			otherGuyImage.src = "images/jake.png";
-			var ctx = $('#layer2')[0].getContext("2d");
-			
-			function drawGuy(pos) {
-				ctx.drawImage(otherGuyImage, pos.x, pos.y);						
+			var ctx = game_assets.canvases[1].getContext("2d");
+
+			function drawGuy(player) {
+			    var x = player.pos.x;
+			    var y = player.pos.y;
+			    ctx.drawImage(game_assets.images[player.job], x, y);
 			}
 			
-			socket.on('position', function(data) {
-				otherGuysPositions[data.id] = data.position;
-			});
-			
-			var gameLoop = function() {
-				socket.emit('position', { x: player.left, y: player.top } );
-				player.draw();
+			var gameLoop = function () {
+
+			    ctx.clearRect(0, 0, game_assets.canvases[1].width, game_assets.canvases[1].height);
 				
-				for(var guy in otherGuysPositions){
-					drawGuy(otherGuysPositions[guy]);
-				}				
+			    for (var i = 0; i < current_players.length; i++) {
+			        drawGuy(current_players[i]);
+			    }	
 				
 				requestAnimationFrame(gameLoop);
 			};
