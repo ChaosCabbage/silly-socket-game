@@ -18,6 +18,51 @@
     position: relative;
 }
 
+button {
+	border-radius: 10%;
+	border: solid #1f628d 2px;
+	font-style: bold;
+	font-size: 5em;
+	color: darkred;
+	font-family: "Impact", "Arial", sans-serif;
+	width: 50%; 
+	height: 50%;
+	background: rgba(54, 100, 50, .5);
+	text-decoration: none;
+}
+
+button.ice {
+	color: #0066CC;
+	background: rgba(0, 255, 255, .5);
+}
+button.ice:hover {
+	background: rgba(0, 255, 255, .9);
+}
+
+button.fire {
+	color: #CC0000;
+	background: rgba(255, 102, 0, .5);
+}
+button.fire:hover {
+	background: rgba(255, 102, 0, .9);
+}
+
+button.earth {
+	color: #663300;
+	background: rgba(153, 102, 0, .5);
+}
+button.earth:hover {
+	background: rgba(153, 102, 0, .9);
+}
+
+button.gimp {
+	color: black;
+	background: rgba(255,255,255, .5);
+}
+button.gimp:hover {
+	background: rgba(255,255,255, .9);
+}
+
 </style>
 
 <script src="javascripts/lib/Modernizr.2.6.2-touch.js"></script>
@@ -26,23 +71,20 @@
 
 <body>
 
-<script data-main="javascripts/main" src="javascripts/lib/require.js"></script>
-
 <div id="gameboard" class="gameboard">
     <canvas id="layer1" width="1125" height="675" style="position: absolute; left: 0; top: 0; z-index: 0;"></canvas>  
     <canvas id="layer2" width="1125" height="675" style="position: absolute; left: 0; top: 0; z-index: 1;"></canvas>
-    <div id="choosejob" style="position: absolute; left: 0; top: 0; z-index: 2;">
-        <button id="chooseice">Ice Wizard</button>
-        <button id="choosefire">Fire Wizard</button>
-        <button id="chooseearth">Earth Wizard</button>
-        <button id="choosegimp">Gimp</button>
-    </div>
+    <div id="choosejob" style="width: 1125px; height: 675px; position: absolute; left: 0; top: 0; z-index: 2;">
+        <button id="chooseice" class="ice">Ice Wizard</button><button id="choosefire" class="fire">Fire Wizard</button><button id="chooseearth" class="earth">Earth Wizard</button><button id="choosegimp" class="gimp">Gimp</button>
+	</div>
 </div>
 
 <img src="images/ice.png" class="asset" id="iceimage" />
 <img src="images/fire.png" class="asset" id="fireimage" />
 <img src="images/earth.png" class="asset" id="earthimage" />
 <img src="images/gimp.png" class="asset" id="gimpimage" />
+
+<script data-main="javascripts/main" src="javascripts/lib/require.js"></script>
 
 </body>
 
