@@ -41,6 +41,7 @@ function(DependencyLoader,
 	        };
 
 	        connect.addEventListener("click", function () {
+				document.getElementById("joining").style.display = "inline";
 	            var socket = io();
 
 	            function assignClickToJob(button, job) {
@@ -69,6 +70,7 @@ function(DependencyLoader,
 
 	            socket.on("joined lobby", function (data) {
 	                var string = JSON.stringify(data).replace(/\n/g, "<br />");
+					document.getElementById("joining").style.display = "none";
 	                document.getElementById("gamestate").innerHTML = string;
 
 	                showJobs();
@@ -86,7 +88,11 @@ function(DependencyLoader,
 	                });
 	            });
 
-                
+                document.getElementById("join").addEventListener("click", function () {
+					var nom = document.getElementById("name").value;
+					socket.emit("join lobby", { name: nom });
+					socket.on("name taken", function() { alert("Name taken"); });
+				});
 
                 
 	        });			

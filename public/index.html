@@ -71,6 +71,12 @@ button.gimp:hover {
 
 <body>
 
+<div id="choosename" style="width: 1125px; height: 675px;">
+	<input id="username" placeholder="Name" style="width:50%; font-size: 2em; border: solid 5px;" /><br/>
+	<button id="submitname" >Join</button><br/>
+	<p id="failtext" style="color:red; display:none;">That name's already taken. Gi'it another go.</p>
+</div>
+
 <div id="gameboard" class="gameboard">
     <canvas id="layer1" width="1125" height="675" style="position: absolute; left: 0; top: 0; z-index: 0;"></canvas>  
     <canvas id="layer2" width="1125" height="675" style="position: absolute; left: 0; top: 0; z-index: 1;"></canvas>

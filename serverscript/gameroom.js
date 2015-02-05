@@ -23,8 +23,11 @@ function GameRoom(io, room_name) {
         }
     };
 
-    this.addNewPlayer = room_io.playerJoinedLobby;
-    this.run = run;
+	return {
+		  nameIsAvailable: room_io.nameIsAvailable
+		, addNewPlayer: room_io.playerJoinedLobby
+		, run: run
+	};
 };
 
 module.exports = GameRoom;

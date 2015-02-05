@@ -29,6 +29,12 @@ function(DependencyLoader,
 	    onLoaded: function () {
 
 	        var game_assets = {
+				username: {
+					all: $("#choosename")[0],
+					name: $("#username")[0],
+					submit: $("#submitname")[0],
+					fail: $("#failtext")[0]
+				},
 	            gameboard: $("#gameboard")[0],
 	            canvases: [$("#layer1")[0], $("#layer2")[0]],
 	            choosebuttons: {
@@ -89,8 +95,10 @@ function(DependencyLoader,
 	        socket.on("joined lobby", function (data) {
 	            setup_buttons();
 	            setup_controls();
+				game_assets.username.all.style.display = "none";
 	            game_assets.gameboard.style.display = "inline";
 	            current_players = data.players;
+				gameLoop();
 	        });
 
 	        socket.on("failed to join", function () {
@@ -103,11 +111,36 @@ function(DependencyLoader,
 
 			
 			var ctx = game_assets.canvases[1].getContext("2d");
+			
+			function drawName(player) {
+				
+				var text = player.name;
+				var text_width = ctx.measureText(text).width;
+				
+				var text_height = 25;
+				
+				var image_halfwidth = game_assets.images[player.job].width / 2;
+				var x = player.pos.x + image_halfwidth;
+				var y = player.pos.y - text_height;
+				
+				var pad = 2;			
+				
+				ctx.fillStyle = "rgba(200,200,255,0.9)";
+				ctx.fillRect(x - (text_width / 2) - pad , y - pad ,text_width + pad*2, text_height + pad*2);
+				
+				
+				ctx.font = '18pt Calibri';
+				ctx.fillStyle = 'blue';
+				ctx.textAlign = 'center';			
+				ctx.textBaseline = 'top';
+				ctx.fillText(text, x, y);
+			}
 
 			function drawGuy(player) {
 			    var x = player.pos.x;
 			    var y = player.pos.y;
 			    ctx.drawImage(game_assets.images[player.job], x, y);
+				drawName(player);
 			}
 			
 			var gameLoop = function () {
@@ -121,7 +154,16 @@ function(DependencyLoader,
 				requestAnimationFrame(gameLoop);
 			};
 			
-			gameLoop();
+			$(game_assets.username.submit).click(function () {
+				var nom = game_assets.username.name.value;
+				if (nom == "") {
+					return;
+				}
+				socket.emit("join lobby", { name: nom });
+				socket.on("name taken", function() { 
+					game_assets.username.failed.style.display = "inline";
+				});
+			});
 
 		},
 		domready: true

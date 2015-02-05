@@ -2,8 +2,17 @@ Hi there.
 This is going to be an amazing game one day, maybe.
 It's all javascript, because that's the fashion these days.
 
-To run the server, install node.js, and run
+To set up the server, install node.js, go to the silly-socket-game folder and run
 
-  node bin/www
+  npm install
   
-The server uses express.js and socket.io
+Then there's two scripts you can run:
+
+  npm start
+  npm test
+  
+You can probably guess what they do.
+
+
+The server uses express.js and socket.io.
+By default, the server will be on port 3000 unless you set the PORT environment variable.

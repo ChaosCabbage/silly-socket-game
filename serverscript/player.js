@@ -39,7 +39,7 @@ function corrected_move(old_pos, move) {
 // Player object
 //
 // methods: data()
-function Player(socket, job) {
+function Player(socket, job, name) {
 
 	var my_pos = { x: 50, y: 50 };
 	
@@ -58,12 +58,13 @@ function Player(socket, job) {
 		return {
 			job: job
 			, pos: my_pos
+			, name: name
 		};
 	};	
 	
 	this.id = socket.id;
 
-	console.log("Created player " + socket.id + " as " + job);
+	console.log("Created player " + name + " as " + job + ". -- id " + socket.id);
 }
 
 module.exports = Player;
