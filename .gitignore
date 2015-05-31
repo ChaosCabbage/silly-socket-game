@@ -55,6 +55,8 @@ Temporary Items
 # Windows
 # =========================
 
+*.dll
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db

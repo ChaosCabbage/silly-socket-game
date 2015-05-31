@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{2b8d51d6-e1e6-4256-b1e0-4713d015fabf}</ProjectGuid>
+    <ProjectHome />
+    <ProjectView>ShowAllFiles</ProjectView>
+    <StartupFile>serverscript\app.js</StartupFile>
+    <WorkingDirectory>.</WorkingDirectory>
+    <OutputPath>.</OutputPath>
+    <ProjectTypeGuids>{3AF33F2E-1136-4D97-BBB7-1795711AC8B8};{349c5851-65df-11da-9384-00065b846f21};{9092AA53-FB77-4645-B42D-1CCCA6BD08BD}</ProjectTypeGuids>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">11.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'" />
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
+  <ItemGroup>
+    <Content Include="package.json" />
+    <Content Include="docs\client code.txt" />
+    <Content Include="docs\server code.txt" />
+    <Content Include="public\debug.html" />
+    <Content Include="public\index.html" />
+    <Compile Include="public\javascripts\debugscreenmain.js" />
+    <Compile Include="public\javascripts\joystix\gamepadSupport.js" />
+    <Compile Include="public\javascripts\joystix\Joystix.js" />
+    <Compile Include="public\javascripts\joystix\KeyboardController.js" />
+    <Compile Include="public\javascripts\joystix\main.js" />
+    <Compile Include="public\javascripts\joystix\MultiTouchJoystick.js" />
+    <Compile Include="public\javascripts\joystix\SimpleAvatar.js" />
+    <Compile Include="public\javascripts\joystix\Vector2.js" />
+    <Compile Include="public\javascripts\lib\DependencyLoader.js" />
+    <Compile Include="public\javascripts\lib\jquery-1.8.3.js" />
+    <Compile Include="public\javascripts\lib\Modernizr.2.6.2-touch.js" />
+    <Compile Include="public\javascripts\lib\requestAnimationFrame.js" />
+    <Compile Include="public\javascripts\lib\require.js" />
+    <Compile Include="public\javascripts\lib\underscore-min-1.4.3.js" />
+    <Compile Include="public\javascripts\main.js" />
+    <Compile Include="public\javascripts\SimpleAvatar.js" />
+    <Compile Include="routes\index.js" />
+    <Compile Include="routes\users.js" />
+    <Compile Include="serverscript\app.js" />
+    <Compile Include="serverscript\gameroom.js" />
+    <Compile Include="serverscript\GameRoomIO.js" />
+    <Compile Include="serverscript\GameRoomLogic.js" />
+    <Compile Include="serverscript\map.js" />
+    <Compile Include="serverscript\player.js" />
+    <Compile Include="serverscript\server.js" />
+    <Compile Include="test\GameRoomLogicTest.js" />
+    <Content Include="views\error.jade" />
+    <Content Include="views\index.jade" />
+    <Content Include="views\layout.jade" />
+    <Content Include="public\images\earth.png" />
+    <Content Include="public\images\fire.png" />
+    <Content Include="public\images\floortile.png" />
+    <Content Include="public\images\gimp.png" />
+    <Content Include="public\images\ice.png" />
+    <Content Include="public\images\jake.png" />
+    <Content Include="public\images\other.png" />
+    <Content Include="public\images\you.png" />
+    <Content Include="public\images\you.jpg" />
+    <Content Include="public\Joystix-master\testharness.html" />
+    <Content Include="public\Joystix-master\README.md" />
+    <Content Include="public\stylesheets\style.css" />
+    <Content Include="public\Joystix-master\css\normalise.css" />
+    <Content Include="public\Joystix-master\img\zelda.gif" />
+    <Compile Include="public\Joystix-master\js\gamepadSupport.js" />
+    <Compile Include="public\Joystix-master\js\Joystix.js" />
+    <Compile Include="public\Joystix-master\js\KeyboardController.js" />
+    <Compile Include="public\Joystix-master\js\main.js" />
+    <Compile Include="public\Joystix-master\js\MultiTouchJoystick.js" />
+    <Compile Include="public\Joystix-master\js\SimpleAvatar.js" />
+    <Compile Include="public\Joystix-master\js\Vector2.js" />
+    <Compile Include="public\Joystix-master\js\lib\DependencyLoader.js" />
+    <Compile Include="public\Joystix-master\js\lib\jquery-1.8.3.js" />
+    <Compile Include="public\Joystix-master\js\lib\Modernizr.2.6.2-touch.js" />
+    <Compile Include="public\Joystix-master\js\lib\requestAnimationFrame.js" />
+    <Compile Include="public\Joystix-master\js\lib\require.js" />
+    <Compile Include="public\Joystix-master\js\lib\underscore-min-1.4.3.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="bin" />
+    <Folder Include="docs" />
+    <Folder Include="public" />
+    <Folder Include="public\images" />
+    <Folder Include="public\javascripts\" />
+    <Folder Include="public\javascripts\joystix\" />
+    <Folder Include="public\javascripts\lib\" />
+    <Folder Include="public\Joystix-master" />
+    <Folder Include="public\Joystix-master\css" />
+    <Folder Include="public\Joystix-master\img" />
+    <Folder Include="public\Joystix-master\js" />
+    <Folder Include="public\Joystix-master\js\lib" />
+    <Folder Include="public\stylesheets" />
+    <Folder Include="routes" />
+    <Folder Include="serverscript" />
+    <Folder Include="test" />
+    <Folder Include="views" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <!--Do not delete the following Import Project.  While this appears to do nothing it is a marker for setting TypeScript properties before our import that depends on them.-->
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)\TypeScript\Microsoft.TypeScript.targets" Condition="False" />
+  <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsTools.targets" />
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>0</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:48022/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>True</UseCustomServer>
+          <CustomServerUrl>http://localhost:1337</CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}" User="">
+        <WebProjectProperties>
+          <StartPageUrl>
+          </StartPageUrl>
+          <StartAction>CurrentPage</StartAction>
+          <AspNetDebugging>True</AspNetDebugging>
+          <SilverlightDebugging>False</SilverlightDebugging>
+          <NativeDebugging>False</NativeDebugging>
+          <SQLDebugging>False</SQLDebugging>
+          <ExternalProgram>
+          </ExternalProgram>
+          <StartExternalURL>
+          </StartExternalURL>
+          <StartCmdLineArguments>
+          </StartCmdLineArguments>
+          <StartWorkingDirectory>
+          </StartWorkingDirectory>
+          <EnableENC>False</EnableENC>
+          <AlwaysStartWebServerOnDebug>False</AlwaysStartWebServerOnDebug>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
