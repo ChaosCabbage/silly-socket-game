@@ -5,7 +5,7 @@
     constructor(game: Phaser.Game) {
         this.game = game;
     }
-
+    
     preload = () => {
 
         var loadingBar = this.game.add.sprite(160, 240, "loading");
@@ -18,7 +18,7 @@
     }
 
     create = () => {
-        var socket = io("http://localhost:3000");
+        var socket = io("http://pmc1:3000");
 
         this.game.state.start("NameInput", true, false, socket);
     }

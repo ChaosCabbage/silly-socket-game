@@ -3,6 +3,8 @@
     game: Phaser.Game;
     socket: Socket;
 
+    name: string;
+
     constructor(game: Phaser.Game) {
         this.game = game;
     }
@@ -13,6 +15,7 @@
 
     init = (socket: Socket) => {
         this.socket = socket;
+        this.name = "";
     }
 
     create = () => {

@@ -34,7 +34,7 @@ class PositionReconciler {
     updateWaiting(): boolean {
         return this.updated;
     }
-
+    
     read(): Point {
         this.updated = false;
         return this.reportedPosition;
@@ -42,16 +42,24 @@ class PositionReconciler {
 }
 
 
+class PlayerNameMap {
+    [key: string]: PlayerData;
+}
 
-var toNameMap = (players: PlayerData[]): Map <string, PlayerData>  => {
-    var map = new Map<string, PlayerData>();
+
+
+
+var toNameMap = (players: PlayerData[]): PlayerNameMap => {
+    var map = new PlayerNameMap;
 
     players.forEach((p: PlayerData) => {
-        map.set(p.name, p);
+        map[p.name] = p;
     });
 
     return map;
 }
+
+
 
 
 
@@ -61,7 +69,7 @@ class GameState {
     game: Phaser.Game;
     socket: Socket;
     yourName: string;
-    serverPlayers: Map<string, PlayerData>;
+    serverPlayers: PlayerNameMap;
 
     layer: Phaser.TilemapLayer;
     cursors: Phaser.CursorKeys;
@@ -85,12 +93,12 @@ class GameState {
     processPlayerDataUpdate(data: PlayerData[]) {
         var playerMap = toNameMap(data);
 
-        if (playerMap.has(this.yourName)) {
-            var you = playerMap.get(this.yourName);
+        if (playerMap[this.yourName] != undefined) {
+            var you = playerMap[this.yourName];
             this.reconciler.update(you.pos);
         }
 
-        playerMap.delete(this.yourName);
+        delete playerMap[this.yourName];
 
         this.serverPlayers = playerMap;       
     }
@@ -194,13 +202,14 @@ class GameState {
         this.extraSprites.forEach((s: Phaser.Sprite) => {
             s.destroy();
         });
-
+        
         this.extraSprites = [];
-
-        this.serverPlayers.forEach((p: PlayerData) => {
-            var newS = this.game.add.sprite(p.pos.x, p.pos.y, 'player', 2);
+        
+        for (var p in this.serverPlayers) {
+            var player = this.serverPlayers[p];
+            var newS = this.game.add.sprite(player.pos.x, player.pos.y, 'player', 2);
             this.extraSprites.push(newS);
-        });
+        };
 
     }
 }

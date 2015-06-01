@@ -75,3 +75,8 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+*.cache
+phaserclient/GameClient/obj/Debug/GameClient.csproj.FileListAbsolute.txt
+*.pdb
+*.user
+public/phaserclient/phaserclient.js

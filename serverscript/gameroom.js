@@ -6,7 +6,7 @@ function GameRoom(io, room_name) {
     var logic = Logic();
     var room_io = RoomIO(io, room_name, logic);
 
-    var delay = 50;
+    var delay = 200;
     var looper = null;
 
     var n = 0;
