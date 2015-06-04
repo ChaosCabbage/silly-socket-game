@@ -18,8 +18,9 @@
     }
 
     create = () => {
-        var socket = io("http://pmc1:3000");
 
+        var address = Debug.SERVER_ADDRESS || "";
+        var socket = io(address);
         this.game.state.start("NameInput", true, false, socket);
     }
     

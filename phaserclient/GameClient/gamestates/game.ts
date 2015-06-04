@@ -133,6 +133,8 @@ class GameState {
 
             this.game.physics.enable(player, Phaser.Physics.ARCADE);
 
+            this.addNameAsChildSprite(player, this.yourName);
+
             player.body.setSize(10, 14, 2, 1);
             return player;
         })();
@@ -153,9 +155,9 @@ class GameState {
             this.processPlayerDataUpdate(data);
         });
     }
-
+    
     update = () => {
-
+        
         var player = this.player;
         var layer = this.layer;
         var cursors = this.cursors;
@@ -166,31 +168,35 @@ class GameState {
         }
 
         this.game.physics.arcade.collide(player, layer);
-
+         
         this.emitter.emit();
 
         player.body.velocity.set(0);
 
-        if (cursors.left.isDown) {
-            player.body.velocity.x = -100;
-            player.play('left');
-        }
-        else if (cursors.right.isDown) {
-            player.body.velocity.x = 100;
-            player.play('right');
-        }
-        else if (cursors.up.isDown) {
-            player.body.velocity.y = -100;
-            player.play('up');
-        }
-        else if (cursors.down.isDown) {
-            player.body.velocity.y = 100;
-            player.play('down');
-        }
-        else {
-            player.animations.stop();
-        }
+        var dx = 0;
+        var dy = 0;
 
+        if (cursors.left.isDown) {  dx -= 100; }
+        if (cursors.right.isDown) { dx += 100; }
+        if (cursors.up.isDown) {    dy -= 100; }
+        if (cursors.down.isDown) { dy += 100; }
+
+        player.body.velocity.x = dx;
+        player.body.velocity.y = dy;
+
+        if (dx == 0 && dy == 0) { player.animations.stop(); }
+        else if (dx < 0) { player.play("left"); } 
+        else if (dx > 0) { player.play("right"); }
+        else if (dy < 0) { player.play("up"); }
+        else if (dy > 0) { player.play("down"); }
+        
+    }
+
+
+    addNameAsChildSprite(sprite: Phaser.Sprite, name: string) {
+        var text = this.game.add.text(0, -20, name, { font: "12px Arial", fill: "#ffff00", align: "center" });
+        text.anchor.set(0.5, 0);
+        sprite.addChild(text);
     }
 
 
@@ -208,6 +214,7 @@ class GameState {
         for (var p in this.serverPlayers) {
             var player = this.serverPlayers[p];
             var newS = this.game.add.sprite(player.pos.x, player.pos.y, 'player', 2);
+            this.addNameAsChildSprite(newS, player.name);
             this.extraSprites.push(newS);
         };
 

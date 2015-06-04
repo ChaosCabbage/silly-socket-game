@@ -29,6 +29,9 @@
   </ItemGroup>
   <ItemGroup>
     <TypeScriptCompile Include="app.ts" />
+    <TypeScriptCompile Include="debugconstants.ts">
+      <SubType>Code</SubType>
+    </TypeScriptCompile>
     <TypeScriptCompile Include="gamestates\boot.ts" />
     <TypeScriptCompile Include="gamestates\game.ts" />
     <TypeScriptCompile Include="gamestates\lobby.ts" />

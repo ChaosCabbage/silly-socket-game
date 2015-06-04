@@ -76,8 +76,8 @@ function(DependencyLoader,
 	                $window: $(window)
 	            });
 
-	            var x_move = 0;
-	            var y_move = 0;
+	            var x_move = 50;
+	            var y_move = 50;
 	            controller.onMove(function (movement) {
 	                x_move += movement.x1;
 	                y_move += movement.y1;
@@ -85,8 +85,6 @@ function(DependencyLoader,
 
 	            var emit_move = function () {
 	                socket.emit("try move", { x: x_move, y: y_move });
-	                x_move = 0;
-	                y_move = 0;
 	            };
 
 	            setInterval(emit_move, 50);
@@ -161,7 +159,7 @@ function(DependencyLoader,
 				}
 				socket.emit("join lobby", { name: nom });
 				socket.on("name taken", function() { 
-					game_assets.username.failed.style.display = "inline";
+					game_assets.username.fail.style.display = "inline";
 				});
 			});
 

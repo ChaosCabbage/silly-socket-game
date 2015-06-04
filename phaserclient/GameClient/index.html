@@ -3,10 +3,12 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>TypeScript HTML App</title>
+    <title>The Sport of Emperors</title>
     <link rel="stylesheet" href="app.css" type="text/css" />
 
     <script src="https://cdn.socket.io/socket.io-1.3.5.js"></script>
+
+    <script src="debugconstants.js"></script>
 
     <script src="gamestates/nameinput.js"></script>
     <script src="gamestates/boot.js"></script>
@@ -20,6 +22,11 @@
 <body>
     <h1>TypeScript HTML App</h1>
 
+    
     <div id="content"></div>
+    <div id="hiddeninput" style="width:0; overflow:hidden">
+        <input type="text" id="hiddennameinput"/>
+    </div>
+    
 </body>
 </html>
